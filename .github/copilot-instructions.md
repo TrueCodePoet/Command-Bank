@@ -29,6 +29,29 @@ Each file within these folders:
 You must parse and follow the full instruction defined inside the selected file.
 ---
 
+## Subfolder Support for Command Grouping
+
+Commands can be organized into subfolders within `.github/instructions/` to group related instructions by domain or workflow (e.g., `book/`, `programming/`).
+
+- The system will recursively scan all subfolders for `.md` files and include them in the command index.
+- The index will show the relative path (including subfolder) for each command.
+- This allows for scalable organization, such as grouping commands for book writing, programming, or other domains.
+
+**Example Structure:**
+```
+.github/instructions/
+    book/
+        analyze-overall.md
+        create-character.md
+    programming/
+        summarize-architecture.md
+        extract-test-cases.md
+```
+
+Refer to commands by their unique name or full path as needed.
+
+---
+
 ## Command Index Generation (REQUIRED FIRST STEP)
 
 Before executing or listing any commands, the system MUST:
@@ -111,4 +134,5 @@ This system is modular and extensible. New commands can be added by placing a pr
 Do this now:
 1. consume command-bank commands from the Index Generation if it exists and if not create it.
 2. consume if available or create the memory-bank.
+
 
