@@ -15,15 +15,37 @@ Your job is to **identify**, **read**, and **execute** the appropriate command b
 In the `.github/framework/must-follow.md` file is a list of instructions that must be followed at all times.  use this as reference and infer when they apply.  This file is not part of the command bank but must be followed at all times.
 
 ## Command Bank Directory
-Location: `.github/instructions/`
+Location: `.github/instructions/` for project/task-specific commands, and `.github/core/` for core framework commands (such as `memory-bank.md`).
 
-Each file within this folder:
+Each file within these folders:
 - Has a filename that matches the command name (e.g., `journal-retrospect.md`)
 - Contains a description of the command’s purpose
-- Defines a full  instruction prompt
+- Defines a full instruction prompt
 - May include additional metadata or usage guidance
 
 You must parse and follow the full instruction defined inside the selected file.
+---
+
+## Command Index Generation (REQUIRED FIRST STEP)
+
+Before executing or listing any commands, the system MUST:
+1. Scan all `.md` files in `.github/core/` (core commands) and `.github/instructions/` (project/task-specific commands).
+2. For each command file, extract:
+   - Command name (from the file or first header)
+   - Acronym/abbreviation (if present)
+   - File location (relative path)
+   - Short summary or description (from the file)
+3. Generate or update `.github/available-commands.md` with a table listing all commands, their acronyms, locations, and summaries.
+4. Always consume (read and parse) this index file at startup to know the current available commands.
+5. Only load the full instruction file when a command is actually invoked.
+
+**Example `available-commands.md` table:**
+
+| Command Name           | Acronym    | Location                                 | Summary                                    |
+|-----------------------|------------|------------------------------------------|--------------------------------------------|
+| Memory Bank           | N/A        | .github/core/memory-bank.md              | Maintains project context across sessions   |
+| Journal Retrospective | j-Retro    | .github/instructions/journal-retrospect.md | Analyzes git activity for improvement      |
+
 ---
 
 ## How to Use
@@ -65,6 +87,6 @@ If previous outputs or summaries are stored in a `memory/` folder, commands may 
 This system is modular and extensible. New commands can be added by placing a properly formatted `.md` instruction file into `.github/instructions/`. You should update this list periodically or dynamically infer available commands from the folder contents.
 
 Do this now:
-1. consume command-bank commands.
-2. consume memory-bank.
+1. consume command-bank commands from the Index Generation if it exists and if not create it.
+2. consume if available or create the memory-bank.
 
