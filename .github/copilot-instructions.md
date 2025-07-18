@@ -12,7 +12,7 @@ Your job is to **identify**, **read**, and **execute** the appropriate command b
 ---
 
 # MUST Follow Instructions
-In the `.github/instructions/MUSTfollow.md` file is a list of instructions that must be followed at all times.  use this as reference and infer when they apply.  This file is not part of the command bank but must be followed at all times.
+In the `.github/framework/must-follow.md` file is a list of instructions that must be followed at all times.  use this as reference and infer when they apply.  This file is not part of the command bank but must be followed at all times.
 
 ## Command Bank Directory
 Location: `.github/instructions/`
