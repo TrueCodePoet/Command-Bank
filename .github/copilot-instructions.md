@@ -85,6 +85,25 @@ If previous outputs or summaries are stored in a `memory/` folder, commands may 
 - Command execution is scoped to the currently open file, selection or workspace unless otherwise directed.
 ---
 
+## Trigger Examples
+
+To force the agent to consume the Command Bank and follow its instructions, a user can use triggers such as:
+- "Use the command bank"
+- "Load all available commands"
+- "Scan for command instructions"
+- "Show me the command bank index"
+- "Initialize with command bank"
+- "Consume all command instructions"
+- "Start with command bank context"
+- **On start of conversation** (the agent should automatically perform this unless otherwise configured)
+
+When any of these triggers are detected at the start of a conversation, the agent will:
+1. Scan and index all core and instruction commands.
+2. Generate or update the available commands summary file.
+3. Be ready to execute any command as requested by the user.
+
+---
+
 ## Developer’s Note
 
 This system is modular and extensible. New commands can be added by placing a properly formatted `.md` instruction file into `.github/instructions/`. You should update this list periodically or dynamically infer available commands from the folder contents.
