@@ -1,4 +1,7 @@
-#  Command Bank Instruction Set
+# Command Bank Instruction Set
+
+> The Command Bank is an additional capability for the agent. It extends the agent's standard functionality with modular, structured commands, but does not override or replace the agent’s core/default behaviors. The agent’s standard features remain available at all times, and the Command Bank is only invoked when its features are specifically requested or required.
+
 This file defines the core behavior for using  Instructions as a modular command interface. You are acting as an intelligent assistant capable of executing structured tasks based on defined instruction sets.
 
 ## Purpose
