@@ -1,14 +1,13 @@
 # Command Bank
 
-> A modular framework for managing reusable AI## Available Commands
-
+> A modular framework for managing reusable AI
+ 
+## Available Commands
 | Command File              | Acronym  | Description                                                  |
 |## Learn More
 
 ### Related Resources
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [OpenAI Cookbook - Prompt Engineering](https://github.com/openai/openai-cookbook)
-- [Prompt Engineering Guide](https://github.com/dair-ai/Prompt-Engineering-Guide)
 
 ### Key Concepts
 - **Command Bank**: Structured AI instruction system
@@ -145,6 +144,16 @@ The Memory Bank is a sophisticated project context management system designed fo
 ---
 
 ## Example Workflow
+### Starting command-bank
+1. Open your project in VS Code
+2. Enter: "Enable the command-bank" into your agent command window and hit enter.
+3. you should see the agent consuiming avaiable commands.
+
+### Once the command-bank is enabled you can create the memory-bank
+1. Enter: "Implement the memory bank" into your agent command window and hit enter.
+2. you should see the agent consuiming or creating the memory-bank.
+> if you have multiple folders or projects in the workspace just tell the agent which one.
+> Enter: for the XYZ project Implement the memory bank
 
 ### Using Journal Retrospective
 1. Open your project in VS Code
