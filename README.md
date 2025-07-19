@@ -3,8 +3,9 @@
 > A modular framework for managing reusable AI
  
 ## Available Commands
-| Command File              | Acronym  | Description                                                  |
-|## Learn More
+| Command File | Acronym | Description |
+
+## Learn More
 
 ### Related Resources
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
