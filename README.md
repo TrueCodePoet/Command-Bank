@@ -1,9 +1,13 @@
 # Command Bank
 
 > A modular framework for managing reusable AI
- 
+
 ## Available Commands
-| Command File | Acronym | Description |
+
+| Command File             | Acronym   | Description                                                                                       |
+|-------------------------|-----------|---------------------------------------------------------------------------------------------------|
+| `journal-retrospect.md` | j-Retro   | Analyzes dev reflections, git logs, and commit activity for behavioral insights and improvement    |
+| `memory-bank.md`        | N/A       | Comprehensive project context management system that maintains documentation across AI sessions    |
 
 ## Learn More
 
@@ -18,15 +22,13 @@
 
 ---
 
-> *Use markdown. Program AI. Share intelligence.*  
-> This is the future of prompt engineering and AI-assisted development workflows.-----------------|----------|--------------------------------------------------------------|
-| `journal-retrospect.md`   | `j-Retro` | Analyzes dev reflections, git logs, and commit activity for behavioral insights and improvement suggestions |
-| `memory-bank.md`          | N/A      | Comprehensive project context management system that maintains documentation across AI sessions |
+> *Use markdown. Program AI. Share intelligence.*
+> This is the future of prompt engineering and AI-assisted development workflows.
 
 ### Command Features
 
 - **Journal Retrospective**: Uses git commands (read-only) to analyze commit history, emotional patterns in development, and suggests process improvements
-- **Memory Bank**: Structured documentation system with core files (projectbrief.md, productContext.md, etc.) that helps AI maintain project understanding across sessionsions that turn GitHub Copilot (or any AI agent) into a programmable assistant inside your editor.
+- **Memory Bank**: Structured documentation system with core files (projectbrief.md, productContext.md, etc.) that helps AI maintain project understanding across sessions
 
 Command Bank lets you define a structured set of **declarative commands** as markdown-based instruction files. These commands can be version-controlled, shared, and executed directly within VS Code to enhance development workflows using AI.
 
@@ -59,10 +61,10 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 
 ### Key Components
 
-- **`copilot-instructions.md`** - The main controller that defines how AI agents consume and execute commands
-- **`framework/must-follow.md`** - Global rules and constraints applied to all AI operations
-- **`instructions/`** - The Command Bank containing individual command files
-- **Memory Bank** - Optional project memory system for maintaining context across AI sessions
+- **`copilot-instructions.md`** — The main controller that defines how AI agents consume and execute commands
+- **`framework/must-follow.md`** — Global rules and constraints applied to all AI operations
+- **`instructions/`** — The Command Bank containing individual command files
+- **Memory Bank** — Optional project memory system for maintaining context across AI sessions
 
 
 
@@ -88,13 +90,13 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 
 ## Example Commands
 
-| Command File              | Description                                                  |
-|---------------------------|--------------------------------------------------------------|
-| `journal-retrospect.md`   | Analyzes dev reflections for behavior patterns and suggestions |
-| `summarize-architecture.md` | Describes a file/module’s purpose and dependencies        |
-| `convert-java-to-csharp.md` | Translates Java source into idiomatic C# code             |
-| `generate-readme.md`      | Builds a complete README from a source file or component     |
-| `extract-test-cases.md`   | Creates test scenarios from feature specs or markdown        |
+| Command File                | Description                                                    |
+|----------------------------|----------------------------------------------------------------|
+| `journal-retrospect.md`    | Analyzes dev reflections for behavior patterns and suggestions  |
+| `summarize-architecture.md`| Describes a file/module’s purpose and dependencies             |
+| `convert-java-to-csharp.md`| Translates Java source into idiomatic C# code                  |
+| `generate-readme.md`       | Builds a complete README from a source file or component        |
+| `extract-test-cases.md`    | Creates test scenarios from feature specs or markdown           |
 
 > View the full list in [`copilot-instructions.md`](./instructions/copilot-instructions.md)
 
