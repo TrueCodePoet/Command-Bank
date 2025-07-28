@@ -26,6 +26,21 @@
 | `journal-retrospect.md` | j-Retro   | Analyzes dev reflections, git logs, and commit activity for behavioral insights and improvement    |
 | `memory-bank.md`        | N/A       | Comprehensive project context management system that maintains documentation across AI sessions    |
 
+## Available Commands (Example)
+
+| Command File                                 | Acronym | Description                                                        |
+|----------------------------------------------|---------|--------------------------------------------------------------------|
+| `analysis/find-logical-fallacies.md`         | FLF     | Detects and explains logical fallacies in arguments or text        |
+| `analysis/compare-and-contrast.md`           | CNC     | Compares and contrasts items in a Markdown table                   |
+| `learning/create-quiz.md`                    | CQZ     | Generates review questions from subject and learning objectives     |
+| `analysis/extract-questions.md`              | EXQ     | Extracts questions and analyzes their effectiveness                |
+| `programming/improve-prompt.md`              | IMP     | Refines and enhances LLM/AI prompts for clarity and effectiveness  |
+| `content/summarize-content.md`               | SUM     | Summarizes content with key points and takeaways                   |
+| `content/extract-insights.md`                | EXINS   | Extracts powerful insights from text                               |
+| `security/report-finding-create.md`          | CRF     | Creates a professional security finding for assessment reports     |
+| `journal-retrospect.md`                      | j-Retro | Analyzes git activity for workflow and emotional insights          |
+| `core/memory-bank.md`                        | N/A     | Maintains project context across sessions                          |
+
 ---
 
 ## New Features & Concepts
@@ -300,4 +315,54 @@ MIT License — see [`LICENSE`](./LICENSE)
 
 ---
 
-For more details, see the full instructions in each command file under `.github/instructions/`.
+## Usage Examples
+
+### Example 1: Summarize Content (SUM)
+**Command:** `content/summarize-content.md`
+**Input:** select or Paste a technical article or documentation.  Then type : Summarize Content.
+**Output:**
+```
+ONE SENTENCE SUMMARY:
+A concise summary of the article in 20 words.
+
+MAIN POINTS:
+1. Key point one
+2. Key point two
+...
+
+TAKEAWAYS:
+1. Major takeaway one
+2. Major takeaway two
+...
+```
+
+---
+
+### Example 2: Find Logical Fallacies (FLF)
+**Command:** `analysis/find-logical-fallacies.md`
+**Input:** select or Paste an argumentative essay or debate transcript. then type FLF
+**Output:**
+```
+- Fallacy: Appeal to Probability
+  Explanation: Assumes something is true because it is likely.
+  Example: "It will probably rain, so we should cancel."
+- Fallacy: Non Sequitur
+  Explanation: Conclusion does not logically follow premise.
+  Example: "She drives a BMW, so she must be rich."
+```
+
+---
+
+### Example 3: Create Quiz (CQZ)
+**Command:** `learning/create-quiz.md`
+**Input:** Select or Provide subject and learning objectives.  Then type CQZ
+**Output:**
+```
+Subject: Machine Learning
+Learning Objective: Understand supervised vs. unsupervised learning
+  - What is the main difference between supervised and unsupervised learning?
+  - Give an example of a supervised learning algorithm.
+  - Why might you choose unsupervised learning?
+```
+
+---
