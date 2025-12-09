@@ -127,7 +127,7 @@ flowchart TD
     Strategy --> Present[Present Approach]
 ```
 
-### Act Mode
+### Act or Agent Mode
 ```mermaid
 flowchart TD
     Start[Start] --> Context[Check Memory Bank]
@@ -193,4 +193,5 @@ The format is flexible - focus on capturing valuable insights that help me work 
 REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.
 
 **IMPORTANT:**  Command Bank files are not to be included in the memory bank.  The memory bank is to focus on the project being worked.
+
 
