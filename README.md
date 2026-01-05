@@ -21,10 +21,9 @@
 
 ## Available Commands
 
-| Command File             | Acronym   | Description                                                                                       |
-|-------------------------|-----------|---------------------------------------------------------------------------------------------------|
-| `journal-retrospect.md` | j-Retro   | Analyzes dev reflections, git logs, and commit activity for behavioral insights and improvement    |
-| `memory-bank.md`        | N/A       | Comprehensive project context management system that maintains documentation across AI sessions    |
+The canonical list of commands is in `.github/available-commands.md`.
+
+To refresh the registry in Copilot Chat, run: `init command bank`.
 
 ## Available Commands (Example)
 
@@ -47,14 +46,14 @@
 
 ### 🗂️ Subfolder Support & Command Grouping
 - Commands can be organized into subfolders within `.github/instructions/` (e.g., `book/`, `programming/`)
-- The system recursively scans all subfolders for `.md` files and includes them in the command index
+- During `init command bank`, the system recursively scans all subfolders for `.md` files and includes them in the command index
 - Subfolders allow scalable organization by domain, workflow, or project area
 - The command index lists the relative path (including subfolder) for each command
 
 ### 🔄 Dynamic Command Indexing
-- On startup, the system generates or updates `.github/available-commands.md` with a table of all commands, acronyms, locations, and summaries
-- The index is always consumed to know the current available commands
-- Only the selected command file is loaded fully when invoked
+- The registry file is `.github/available-commands.md`
+- Only `init command bank` rebuilds the registry (scan + regenerate)
+- Normal command execution is registry-first (no scanning); only the selected command file is loaded when invoked
 
 ### 🧠 Memory Awareness
 - If a `memory/` folder exists, commands may reference it for context or to augment outputs
@@ -135,7 +134,7 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 
 1. **`copilot-instructions.md`** defines the behavior of the command bank and how to execute commands.
 2. Each `.md` file in `.github/instructions/` or any subfolder is a **self-contained AI instruction** for a specific task.
-3. The system recursively scans all subfolders for available commands and generates an up-to-date index.
+3. When you run `init command bank`, the agent scans commands and regenerates `.github/available-commands.md`.
 4. The **framework** folder contains global rules that apply to all AI operations.
 5. You open a source file in VS Code (or select code), then reference one of these command files.
 6. Trigger your AI agent (GitHub Copilot, etc.) and it will read the instruction and use your current file/selection as the execution context.
@@ -143,8 +142,8 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 
 ### Command Execution Flow
 1. AI agent reads `copilot-instructions.md` to understand the system
-2. AI scans `.github/instructions/` and all subfolders for available commands
-3. AI generates or updates `.github/available-commands.md` as the command index
+2. If requested, run `init command bank` to rebuild `.github/available-commands.md`
+3. Otherwise, the agent reads `.github/available-commands.md` (no scanning)
 4. AI loads the requested command file and follows its instructions
 5. AI applies the command to the current context (active file, selection, etc.)
 6. AI follows any applicable rules from `framework/must-follow.md`
@@ -161,7 +160,7 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 | `generate-readme.md`       | Builds a complete README from a source file or component        |
 | `extract-test-cases.md`    | Creates test scenarios from feature specs or markdown           |
 
-> View the full list in [`copilot-instructions.md`](./instructions/copilot-instructions.md)
+> View the full list in `.github/available-commands.md`
 
 ---
 
@@ -210,16 +209,17 @@ The Memory Bank is a sophisticated project context management system designed fo
 ---
 
 ## Example Workflow
-### Starting command-bank
+### Initialize the Command Bank
 1. Open your project in VS Code
-2. Enter: "Enable the command-bank" into your agent command window and hit enter.
-3. you should see the agent consuiming avaiable commands.
+2. In Copilot Chat, enter: `init command bank`
+3. Open `.github/available-commands.md` to see the updated registry
 
-### Once the command-bank is enabled you can create the memory-bank
-1. Enter: "Implement the memory bank" into your agent command window and hit enter.
-2. you should see the agent consuiming or creating the memory-bank.
-> if you have multiple folders or projects in the workspace just tell the agent which one.
-> Enter: for the XYZ project Implement the memory bank
+### Use the Memory Bank (optional)
+1. In Copilot Chat, ask to run `Memory Bank`.
+2. The agent will use the `memory-bank/` folder for durable context.
+
+> If you have multiple folders or projects in the workspace, specify which one.
+> Example: "For the XYZ project, run Memory Bank"
 
 ### Using Journal Retrospective
 1. Open your project in VS Code
@@ -229,7 +229,7 @@ The Memory Bank is a sophisticated project context management system designed fo
 
 ### Setting Up Memory Bank
 1. Create a `memory-bank/` folder in your project root
-2. Use the `memory-bank.md` command to initialize core documentation files
+2. Use the `.github/core/memory-bank.md` command to initialize core documentation files
 3. AI agents will maintain and update these files across sessions
 4. Enjoy consistent project context and improved AI assistance
 

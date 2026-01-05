@@ -33,7 +33,7 @@ You must parse and follow the full instruction defined inside the selected file.
 
 Commands can be organized into subfolders within `.github/instructions/` to group related instructions by domain or workflow (e.g., `book/`, `programming/`).
 
-- The system will recursively scan all subfolders for `.md` files and include them in the command index.
+- During `init command bank`, the system will recursively scan all subfolders for `.md` files and include them in the command index.
 - The index will show the relative path (including subfolder) for each command.
 - This allows for scalable organization, such as grouping commands for book writing, programming, or other domains.
 
@@ -52,18 +52,26 @@ Refer to commands by their unique name or full path as needed.
 
 ---
 
-## Command Index Generation (REQUIRED FIRST STEP)
+## Command Index (Registry)
 
-Before executing or listing any commands, the system MUST:
+`.github/available-commands.md` is the canonical registry.
+
+### init command bank (explicit)
+When the user says `init command bank`, you MUST:
 1. Scan all `.md` files in `.github/core/` (core commands) and `.github/instructions/` (project/task-specific commands).
 2. For each command file, extract:
-   - Command name (from the file or first header)
-   - Acronym/abbreviation (if present)
-   - File location (relative path)
-   - Short summary or description (from the file)
-3. Generate or update `.github/available-commands.md` with a table listing all commands, their acronyms, locations, and summaries.
-4. Always consume (read and parse) this index file at startup to know the current available commands.
-5. Only load the full instruction file when a command is actually invoked.
+    - Command name (from the file or first `#` header)
+    - Acronym/abbreviation (if present; otherwise `N/A`)
+    - File location (relative path)
+    - Short summary or description (best-effort)
+3. Regenerate `.github/available-commands.md` deterministically from current repo state.
+4. Do NOT modify any command files during `init command bank`.
+
+### Normal operation (no scanning)
+When executing or listing commands (unless the user says `init command bank`), you MUST:
+1. Read `.github/available-commands.md`.
+2. Resolve the selected command to exactly one command file.
+3. Load that command file fully and apply the embedded instruction verbatim.
 
 **Example `available-commands.md` table:**
 
@@ -75,13 +83,15 @@ Before executing or listing any commands, the system MUST:
 ---
 
 ## How to Use
-When this file (`copilot-instructions.md`) is opened:
+When the user asks to use the Command Bank:
 
-1. You must scan the `.github/instructions/` folder for all available command files.
-2. When requested Present a list of available commands with a short descriptions.
-3. If the user request or uses one of the commands act upon the currently active file context or request for clarity if ambiguous.
+1. If the user says `init command bank`, regenerate `.github/available-commands.md` (registry refresh) and stop.
+2. Otherwise, read `.github/available-commands.md` to discover available commands.
+3. If the user requests a command by name/acronym, resolve it to a single file path from the registry.
 4. Load the selected `.md` instruction file fully.
-5. Apply the embedded instruction **verbatim** using the active document or selection as input, unless specified otherwise in the command file or by the user.  
+5. Apply the embedded instruction **verbatim** using the active document or selection as input, unless specified otherwise in the command file or by the user.
+
+If you create, rename, move, or delete a command file during a task, you MUST update `.github/available-commands.md` in the same change.
 ---
 ## Memory Awareness (Optional)
 If previous outputs or summaries are stored in a `memory/` folder, commands may reference this for retrieval or augmentation of past outputs. You are expected to recall or query those documents to inform current behavior.
@@ -111,19 +121,13 @@ If previous outputs or summaries are stored in a `memory/` folder, commands may 
 ## Trigger Examples
 
 To force the agent to consume the Command Bank and follow its instructions, a user can use triggers such as:
+- "init command bank" (regenerates `.github/available-commands.md`)
 - "Use the command bank"
 - "Load all available commands"
-- "Scan for command instructions"
 - "Show me the command bank index"
 - "Initialize with command bank"
-- "Consume all command instructions"
-- "Start with command bank context"
-- **On start of conversation** (the agent should automatically perform this unless otherwise configured)
 
-When any of these triggers are detected at the start of a conversation, the agent will:
-1. Scan and index all core and instruction commands.
-2. Generate or update the available commands summary file.
-3. Be ready to execute any command as requested by the user.
+The agent MUST NOT assume a startup procedure. Only run `init command bank` when the user explicitly asks.
 
 ---
 
@@ -132,7 +136,7 @@ When any of these triggers are detected at the start of a conversation, the agen
 This system is modular and extensible. New commands can be added by placing a properly formatted `.md` instruction file into `.github/instructions/`. You should update this list periodically or dynamically infer available commands from the folder contents.
 
 Do this now:
-1. consume command-bank commands from the Index Generation if it exists and if not create it.
-2. consume if available or create the memory-bank.
+1. If the user asks for `init command bank`, regenerate `.github/available-commands.md`.
+2. If the user asks to consume the memory bank, run the `Memory Bank` command.
 
 
