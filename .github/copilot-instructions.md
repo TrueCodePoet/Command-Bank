@@ -20,6 +20,12 @@ In the `.github/framework/must-follow.md` file is a list of instructions that mu
 ## Command Bank Directory
 Location: `.github/instructions/` for project/task-specific commands, and `.github/core/` for core framework commands (such as `memory-bank.md`).
 
+## Agent Skills (Optional)
+This repo may also define Agent Skills under `.github/skills/` (for example, `.github/skills/memory-bank/SKILL.md`).
+
+- Skills are loaded when relevant by supported Copilot agent experiences.
+- Skills complement (but do not replace) the Command Bank registry and explicit command invocation.
+
 Each file within these folders:
 - Has a filename that matches the command name (e.g., `journal-retrospect.md`)
 - Contains a description of the command’s purpose
@@ -28,6 +34,13 @@ Each file within these folders:
 
 You must parse and follow the full instruction defined inside the selected file.
 ---
+
+## VS Code Custom Agents (Optional)
+This repo may define optional VS Code custom agents under `.github/agents/` (files ending in `.agent.md`).
+
+- Agents are optional personas/modes (plan vs implement vs review, etc.)
+- They do **not** change Command Bank behavior: the canonical registry is still `.github/available-commands.md`, and scanning still only happens when the user explicitly says `init command bank`.
+
 
 ## Subfolder Support for Command Grouping
 
@@ -94,7 +107,7 @@ When the user asks to use the Command Bank:
 If you create, rename, move, or delete a command file during a task, you MUST update `.github/available-commands.md` in the same change.
 ---
 ## Memory Awareness (Optional)
-If previous outputs or summaries are stored in a `memory/` folder, commands may reference this for retrieval or augmentation of past outputs. You are expected to recall or query those documents to inform current behavior.
+If previous outputs or summaries are stored in a `memory-bank/` folder (or a `memory/` folder in other repos), commands may reference it for retrieval or augmentation of past outputs. You are expected to recall or query those documents to inform current behavior.
 
 ---
 

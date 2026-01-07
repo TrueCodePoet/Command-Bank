@@ -56,8 +56,18 @@ To refresh the registry in Copilot Chat, run: `init command bank`.
 - Normal command execution is registry-first (no scanning); only the selected command file is loaded when invoked
 
 ### 🧠 Memory Awareness
-- If a `memory/` folder exists, commands may reference it for context or to augment outputs
-- The memory bank is always read at the start of a session or when context is needed
+- If a `memory-bank/` folder exists (or `memory/` in other repos), commands may reference it for context or to augment outputs
+- The memory bank is used when explicitly requested (for example: “run/consume/update memory bank”)
+
+### 🧰 Agent Skills (Optional)
+- This repo can provide Agent Skills under `.github/skills/` for supported Copilot agent experiences
+- Skills are loaded when relevant (based on your prompt + the skill description)
+- The Memory Bank workflow is also available as a skill at `.github/skills/memory-bank/SKILL.md`
+
+### 🤖 Custom Agents (Optional)
+- This repo can also provide VS Code custom agents under `.github/agents/` (for supported Copilot/VS Code experiences)
+- Agents are optional “personas” that help you switch modes (plan vs implement vs review)
+- See: `.github/agents/planner.agent.md`, `.github/agents/implementer.agent.md`, `.github/agents/reviewer.agent.md`, `.github/agents/memory-bank.agent.md`
 
 ---
 
@@ -73,6 +83,7 @@ To refresh the registry in Copilot Chat, run: `init command bank`.
 - **Command Acronyms**: Quick reference shortcuts for commands
 - **Subfolder Grouping**: Organize commands by domain or workflow
 - **Dynamic Indexing**: Always up-to-date command list
+- **Custom Agents**: Optional mode/persona switching
 
 ---
 
@@ -105,12 +116,22 @@ Traditional Copilot usage relies on inline code completions or manually crafted 
 
 ```
 .github/
+├── available-commands.md       # Canonical registry (read first; no scanning)
+├── agents/                    # Optional VS Code custom agents (.agent.md)
+│   ├── planner.agent.md
+│   ├── implementer.agent.md
+│   ├── reviewer.agent.md
+│   └── memory-bank.agent.md
 ├── copilot-instructions.md     # Entry point: explains how the command system works
+├── core/                       # Core framework commands
+│   └── memory-bank.md
 ├── framework/
 │   └── must-follow.md         # Core instructions that must always be followed
+├── skills/                     # Optional Agent Skills
+│   └── memory-bank/
+│       └── SKILL.md
 └── instructions/              # Command Bank - individual AI command files and subfolders
     ├── journal-retrospect.md  # Analyzes dev reflections and git activity
-    ├── memory-bank.md         # Manages project context across AI sessions
     ├── book/                  # Book writing commands (grouped)
     │   ├── create-character.md
     │   └── analyze-overall.md
@@ -217,6 +238,11 @@ The Memory Bank is a sophisticated project context management system designed fo
 ### Use the Memory Bank (optional)
 1. In Copilot Chat, ask to run `Memory Bank`.
 2. The agent will use the `memory-bank/` folder for durable context.
+
+### Use a Custom Agent (optional)
+If your Copilot/VS Code experience supports custom agents:
+1. Select an agent from `.github/agents/` (Planner / Implementer / Reviewer / Memory Bank)
+2. Continue the conversation in that mode (the agent file describes the intended workflow)
 
 > If you have multiple folders or projects in the workspace, specify which one.
 > Example: "For the XYZ project, run Memory Bank"

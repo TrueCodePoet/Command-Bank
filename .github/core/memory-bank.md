@@ -1,9 +1,17 @@
 # Memory Bank
 
+## Agent Skill (preferred)
+
+If Agent Skills are supported in your environment, prefer the project skill at:
+
+- `.github/skills/memory-bank/SKILL.md`
+
+Use this command as the explicit entry point when a user asks to "run/consume/update memory bank".
+
 ## AI Role and Expected Output
 
 When running this command, the AI should:
-- Read and understand all memory bank files in the `memory-bank/` folder.
+- Read and understand the core memory bank files in the `memory-bank/` folder.
 - Summarize the current project context, recent changes, and active work focus.
 - Identify missing or outdated documentation and suggest updates.
 - Clarify any ambiguous or incomplete information.
@@ -21,14 +29,15 @@ When running this command, the AI should:
 - When new project patterns or technical decisions are discovered
 - At the end of a sprint, milestone, or major feature
 - When context or requirements need clarification
-- When the user requests with **update memory bank** or **consume memory bank** (MUST review ALL files)
+- When the user requests with **update memory bank** or **consume memory bank**
 
 > **Tip:** Regular updates ensure the memory bank remains a reliable source of project truth and context for all contributors and AI agents.
 
 ---
 
-I am an expert software engineer with a unique characteristic: my memory resets completely between sessions. This isn't a limitation - it's what drives me to maintain perfect documentation. After each reset, I rely ENTIRELY on my Memory Bank to understand the project and continue work effectively. I MUST read ALL memory bank files at the start of EVERY task - this is not optional.
-The root of the memory bank is the readme.md file, which provides an overview of the project and links to all core files. The memory bank is structured to provide a clear, hierarchical view of the project context, system patterns, technical details, and active work focus.
+This command is only run when explicitly requested. Do NOT assume a startup procedure.
+
+When triggered to **consume** or **update** the memory bank, review all core files (listed below) to understand and maintain project context.
 
 ## Memory Bank Structure
 The Memory Bank consists of required core files and optional context files, all in Markdown format. Files build upon each other in a clear hierarchy:
@@ -132,8 +141,8 @@ flowchart TD
 flowchart TD
     Start[Start] --> Context[Check Memory Bank]
     Context --> Update[Update Documentation]
-    Update --> Rules[Update .rules if needed]
-    Rules --> Execute[Execute Task]
+    Update --> Execute[Execute Task]
+    Execute --> Document[Document Changes]
     Execute --> Document[Document Changes]
 ```
 
@@ -141,7 +150,7 @@ flowchart TD
 Memory Bank updates occur when:
 1. Discovering new project patterns
 2. After implementing significant changes
-3. When user requests with **update memory bank** or **consume memory bank** (MUST review ALL files)
+3. When user requests with **update memory bank** or **consume memory bank** (review all core files)
 4. When context needs clarification
  
 ```mermaid
@@ -149,11 +158,10 @@ Memory Bank updates occur when:
 flowchart TD
     Start[Update Process]
     subgraph Process
-        P1[Review ALL Files]
+        P1[Review Core Files]
         P2[Document Current State]
         P3[Clarify Next Steps]
-        P4[Update .rules]
-        P1 --> P2 --> P3 --> P4
+        P1 --> P2 --> P3
     end
     Start --> Process
 ```
@@ -161,37 +169,8 @@ Note: When triggered by **update memory bank**, I MUST review every memory bank 
 
 ---
 
-## Project Intelligence (.rules)
-The .rules file is my learning journal for each project. It captures important patterns, preferences, and project intelligence that help me work more effectively. As I work with you and the project, I'll discover and document key insights that aren't obvious from the code alone.
+## Scope
 
-```mermaid
-flowchart TD
-    Start{Discover New Pattern}
-    subgraph Learn [Learning Process]
-        D1[Identify Pattern]
-        D2[Validate with User]
-        D3[Document in .rules]
-    end
-    subgraph Apply [Usage]
-        A1[Read .rules]
-        A2[Apply Learned Patterns]
-        A3[Improve Future Work]
-    end
-    Start --> Learn
-    Learn --> Apply
-```
-
-### What to Capture
-- Critical implementation paths
-- User preferences and workflow
-- Project-specific patterns
-- Known challenges
-- Evolution of project decisions
-- Tool usage patterns
-
-The format is flexible - focus on capturing valuable insights that help me work more effectively with you and the project. Think of .rules as a living document that grows smarter as we work together.
-REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.
-
-**IMPORTANT:**  Command Bank files are not to be included in the memory bank.  The memory bank is to focus on the project being worked.
+**IMPORTANT:** Command Bank files are not to be included in the memory bank. The memory bank focuses on the project being worked.
 
 
