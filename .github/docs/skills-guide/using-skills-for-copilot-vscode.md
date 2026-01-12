@@ -2,6 +2,136 @@
 title: Using Agent Skills with GitHub Copilot in VS Code
 ---
 
+# Agent Skills (detailed)
+
+This document provides an end-to-end, practical guide for authoring, testing, and operating Agent Skills for GitHub Copilot in VS Code. It is tailored for the Command Bank repository conventions (registry-first, explicit `init command bank`, optional `.github/skills/` for project skills) and follows guidance from the official VS Code Agent Skills documentation.
+
+## Quick overview
+
+Agent Skills are a portable, open standard way to bundle instructions, scripts, examples, and resources so skills-capable agents (like GitHub Copilot in VS Code, the Copilot CLI, and the Copilot coding agent) can load specialized behavior on demand.
+
+Use skills when you want:
+- Reusable, task-focused capabilities that include code examples or helper scripts
+- Workflows that are richer than a single prompt (testing, debugging, memory management)
+- Portability across skills-aware agents and environments
+
+Skills complement the Command Bank registry (`.github/available-commands.md`). Keep the registry for command discovery and use skills for richer, self-contained capabilities.
+
+## Skill types and recommended placement
+
+- Project skills: store under `.github/skills/<skill-name>/SKILL.md` (recommended for team use, versioned with the repo).
+- Personal skills: store under `~/.copilot/skills/` (for user-specific shortcuts).
+
+Each skill should be a directory containing a `SKILL.md` file and optional resources (scripts, templates, examples). Keep each skill focused and scoped.
+
+## `SKILL.md` required structure
+
+1. YAML frontmatter header (required)
+   - `name`: unique, lowercase, hyphen-separated identifier (e.g., `webapp-testing`).
+   - `description`: short, specific description of capability and when to use it.
+
+Example:
+
+---
+name: memory-bank
+description: Maintain durable project context in memory-bank/ by consuming and updating core files.
+---
+
+2. Body: clear sections that explain usage and constraints. Recommended headers:
+- `When to use` — trigger phrases and scenarios
+- `Scope and rules` — read/write boundaries and forbidden edits
+- `Consume (read-only)` — step-by-step read-only workflow and outputs
+- `Update (writes)` — safe update steps and `update-log` format
+- `Examples` — sample prompts, inputs, and outputs
+- `Resources` — links to scripts or templates in the skill folder
+
+## How Copilot loads skills (progressive disclosure)
+
+Copilot uses a three-level loading model to keep context efficient:
+
+1. Discovery: Copilot reads the frontmatter (only `name` and `description`) across skills to decide relevance.
+2. Instruction load: If a skill looks relevant, Copilot loads the `SKILL.md` body into the model context.
+3. Resource access: Additional files (scripts, examples) are accessed only when explicitly referenced.
+
+Implications:
+- Keep frontmatter concise and specific to improve signal for discovery.
+- Put larger examples or helpers as separate files in the skill directory (they are only pulled when needed).
+
+## Authoring best practices
+
+- Make `description` actionable: include common trigger phrases and short examples.
+- Be explicit about scope: list exactly which folders/files the skill may read or write.
+- Prefer step-by-step procedures over long essays. Agents favor short actionable instructions.
+- Provide minimal, runnable examples and templates for common tasks.
+- If the skill writes files, require explicit user intent before writing and define a clear `update-log` format to track changes.
+
+## Security and approvals
+
+- Treat scripts as sensitive: require the user to confirm any script execution.
+- Use VS Code's auto-approve allow-lists carefully; prefer manual approval for anything that can change the repo or environment.
+- Never include secrets, credentials, or tokens in skill files or helper scripts.
+- Enforce human approval for merges to protected branches; do not auto-commit to `main`.
+
+## Packaging and sharing
+
+- To reuse a skill, copy its directory into another repo's `.github/skills/` and review scripts and instructions before use.
+- Consider publishing stable, general-purpose skills in a shared org repository for discovery.
+
+## Testing and validation
+
+1. Dry-run conversations: use your Planner/Implementer/Reviewer agents to exercise the skill in a feature branch.
+2. Manual script validation: run helper scripts locally in an isolated environment before allowing agent-driven execution.
+3. Optional CI: add opt-in CI jobs that run generated tests or validate the outputs of skill-driven edits.
+
+## Example templates (suggested files)
+
+- `.github/skills/README.md` — list and short descriptions of skills in the repo.
+- `.github/skills/TEMPLATE_SKILL.md` — starter template for new skills.
+
+Minimal `TEMPLATE_SKILL.md` starter:
+
+---
+name: skill-name
+description: One-line description of what this skill does and when to use it.
+---
+
+## When to use
+
+Short trigger phrases and situations.
+
+## Scope and rules
+
+What this skill may and may not change.
+
+## Consume (read-only)
+
+Steps for reading and summarizing context.
+
+## Update (writes)
+
+Steps for safe updates and an `update-log` example.
+
+## Examples
+
+Sample prompts and expected outputs.
+
+## Resources
+
+List helper scripts or templates (relative paths).
+
+---
+
+## Recommended next steps (I can implement these)
+
+1. Add `.github/skills/README.md` to index skills in-repo.
+2. Add `.github/skills/TEMPLATE_SKILL.md` as the authoring template.
+3. Add a short snippet in the main `README.md` showing how to enable `chat.useAgentSkills` and where skills live.
+
+If you want, I can create the template and skills README and commit them now.
+---
+title: Using Agent Skills with GitHub Copilot in VS Code
+---
+
 # Using Agent Skills with GitHub Copilot in VS Code
 
 This document explains how to use and author Agent Skills for GitHub Copilot in VS Code, with practical guidance for the Command Bank project. It assumes the repository follows the Command Bank conventions: a canonical registry, explicit `init command bank` trigger, optional skills under `.github/skills/`, and optional VS Code custom agents under `.github/agents/`.
